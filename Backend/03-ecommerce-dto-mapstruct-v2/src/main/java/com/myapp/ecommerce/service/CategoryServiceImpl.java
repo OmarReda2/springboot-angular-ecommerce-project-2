@@ -37,10 +37,26 @@ public class CategoryServiceImpl implements CategoryService{
         }
 
         return categoryDTOS;
-
-
-
     }
+
+
+    @Override
+    public List<CategoryDTO> getAllCategoriesWithProducts() {
+
+        List<ProductCategory> category = categoryDAO.getAllCategoriesWithProducts();
+        List<CategoryDTO> categoryDTOS = new ArrayList<>();
+
+        for (ProductCategory tempCat: category){
+            categoryDTOS.add(mapper.toCategoryDTO(tempCat));
+        }
+
+        return categoryDTOS;
+    }
+
+
+
+
+
 
     @Override
     public CategoryDTO getCategoryById(int theId) {

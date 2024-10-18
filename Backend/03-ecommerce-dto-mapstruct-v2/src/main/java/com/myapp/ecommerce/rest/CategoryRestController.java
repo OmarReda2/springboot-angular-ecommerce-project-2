@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/products/search")
+@RequestMapping("/api")
 @CrossOrigin
 public class CategoryRestController {
 
@@ -22,6 +22,10 @@ public class CategoryRestController {
         categoryService = theCategoryService;
     }
 
+
+
+
+    // retrieve only categories
     @GetMapping("/findAllCategory")
     public ResponseEntity<Object> getAllCategories(){
 
@@ -30,11 +34,25 @@ public class CategoryRestController {
         return ResponseHandler.generateResponse(HttpStatus.OK, category, category.size());
     }
 
+
+
+
+    // retrieve category and its associated products
+    @GetMapping("/findAllCategoryWithProducts")
+    public ResponseEntity<Object> getAllCategoriesWithProducts(){
+
+        List<CategoryDTO> category = categoryService.getAllCategoriesWithProducts();
+
+        return ResponseHandler.generateResponse(HttpStatus.OK, category, category.size());
+    }
+
+
+
+
 //    @GetMapping("/findByCategoryId/{theId}")
 //    public ResponseEntity<Object> getCategoryById(@PathVariable int theId){
-    @GetMapping("/findByCategoryId")
+    @GetMapping("/products/search/findByCategoryId")
     public ResponseEntity<Object> getCategoryById(@RequestParam("id") int theId){
-
 
         CategoryDTO category = categoryService.getCategoryById(theId);
 

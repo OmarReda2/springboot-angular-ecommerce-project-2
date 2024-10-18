@@ -4,6 +4,7 @@ import com.myapp.ecommerce.entity.Product;
 import com.myapp.ecommerce.entity.ProductCategory;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,9 +23,34 @@ public class CategoryDAOImpl implements CategoryDAO {
     @Override
     public List<ProductCategory> getAllCategories() {
 
-        TypedQuery<ProductCategory> query = entityManager.createQuery("From ProductCategory",ProductCategory.class);
+//        TypedQuery<ProductCategory> query = entityManager.createQuery("From ProductCategory",ProductCategory.class);
+
+//        TypedQuery<ProductCategory> query = entityManager
+//                .createQuery("SELECT new ProductCategory(c.id, c.categoryName) " +
+//                                "FROM ProductCategory c " ,ProductCategory.class);
+
+        TypedQuery<ProductCategory> query = entityManager.createQuery("SELECT c From ProductCategory c " +
+                                                                         "JOIN FETCH c.products" ,ProductCategory.class);
+
 
         List<ProductCategory> categories = query.getResultList();
+
+
+        return categories;
+    }
+
+
+
+    @Override
+    public List<ProductCategory> getAllCategoriesWithProducts() {
+
+        TypedQuery<ProductCategory> query = entityManager
+                .createQuery("SELECT new ProductCategory(c.id, c.categoryName) " +
+                        "FROM ProductCategory c " ,ProductCategory.class);
+
+
+        List<ProductCategory> categories = query.getResultList();
+
 
         return categories;
     }

@@ -9,6 +9,8 @@ public interface CategoryService {
 
     List<CategoryDTO> getAllCategories();
 
+    List<CategoryDTO> getAllCategoriesWithProducts();
+
     CategoryDTO getCategoryById(int theId);
 
 }
