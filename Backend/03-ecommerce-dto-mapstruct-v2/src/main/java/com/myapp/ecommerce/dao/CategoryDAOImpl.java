@@ -21,7 +21,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 
 
     @Override
-    public List<ProductCategory> getAllCategories() {
+    public List<ProductCategory> getAllCategoriesWithProducts() {
 
 //        TypedQuery<ProductCategory> query = entityManager.createQuery("From ProductCategory",ProductCategory.class);
 
@@ -35,14 +35,13 @@ public class CategoryDAOImpl implements CategoryDAO {
 
         List<ProductCategory> categories = query.getResultList();
 
-
         return categories;
     }
 
 
 
     @Override
-    public List<ProductCategory> getAllCategoriesWithProducts() {
+    public List<ProductCategory> getAllCategories() {
 
         TypedQuery<ProductCategory> query = entityManager
                 .createQuery("SELECT new ProductCategory(c.id, c.categoryName) " +

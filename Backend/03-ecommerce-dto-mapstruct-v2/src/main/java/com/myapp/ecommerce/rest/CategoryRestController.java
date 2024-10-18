@@ -31,7 +31,7 @@ public class CategoryRestController {
 
         List<CategoryDTO> category = categoryService.getAllCategories();
 
-        return ResponseHandler.generateResponse(HttpStatus.OK, category, category.size());
+        return ResponseHandler.generateNamedResponse(HttpStatus.OK, category, category.size(),"categories");
     }
 
 
@@ -43,7 +43,7 @@ public class CategoryRestController {
 
         List<CategoryDTO> category = categoryService.getAllCategoriesWithProducts();
 
-        return ResponseHandler.generateResponse(HttpStatus.OK, category, category.size());
+        return ResponseHandler.generateNamedResponse(HttpStatus.OK, category, category.size(), "categories");
     }
 
 
