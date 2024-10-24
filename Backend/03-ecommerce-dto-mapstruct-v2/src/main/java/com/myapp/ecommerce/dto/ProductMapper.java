@@ -17,7 +17,8 @@ public interface ProductMapper {
     @Mapping(source = "active", target = "active")
     @Mapping(source = "dateCreated", target = "dateCreated")
     @Mapping(source = "lastUpdated", target = "lastUpdated")
-    @Mapping(source = "category", target = "category")  // Nested mapping
+    @Mapping(source = "category", target = "category") // Nested mapping
+    @Mapping(target = "category.products", ignore = true) // Prevent accessing products during mapping
     ProductDTO toProductDto(Product product);
 
 

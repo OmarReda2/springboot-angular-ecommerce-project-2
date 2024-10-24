@@ -37,14 +37,33 @@ public class ProductRestController {
     }
 
 
+
+
+
+
+
     @GetMapping("/products/{theId}")
     public  ResponseEntity<Object> getProductById(@PathVariable int theId){
 
         ProductDTO data = productService.findProductById(theId);
 
-        Object products = new Object();
-
         return ResponseHandler.generateResponse(HttpStatus.OK, data, 1);
+    }
+
+
+
+
+
+
+
+
+
+    @GetMapping("/products/search/findByNameContaining")
+    public  ResponseEntity<Object> getProductByName(@RequestParam("name") String theName){
+
+        List<ProductDTO> data = productService.findProductByName(theName);
+
+        return ResponseHandler.generateNamedResponse(HttpStatus.OK, data, data.size(), "products");
     }
 
 }

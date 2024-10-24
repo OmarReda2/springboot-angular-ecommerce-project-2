@@ -10,6 +10,8 @@ public interface ProductService {
 
     ProductDTO findProductById(int theId);
 
+    public List<ProductDTO> findProductByName(String theName);
+
 
 
 

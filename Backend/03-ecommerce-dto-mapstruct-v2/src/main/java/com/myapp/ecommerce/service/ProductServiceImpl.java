@@ -7,9 +7,11 @@ import com.myapp.ecommerce.entity.Product;
 import com.myapp.ecommerce.handler.exception.ProductNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -66,6 +68,25 @@ public class ProductServiceImpl implements ProductService {
         }catch (RuntimeException exc){
             throw new ProductNotFoundException("Product Not Found with the Given ID: " + theId);
 
+        }
+    }
+
+
+
+
+
+    @Override
+    @Transactional
+    public List<ProductDTO> findProductByName(String theName){
+
+        try{
+            List<Product> products = productDAO.findProductByName(theName);
+            return products.stream()
+                            .map(p -> mapper.toProductDto(p))
+                            .collect(Collectors.toList());
+
+        }catch (RuntimeException exc){
+            throw new ProductNotFoundException("Products Not Found with the Given Name: " + theName);
         }
     }
 

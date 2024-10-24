@@ -34,5 +34,6 @@ public class ProductCategory {
 //   solution for recursion reference
 //   SOL2:
     @JsonManagedReference
+    @JsonIgnore
     private List<Product> products;
 }

@@ -47,6 +47,17 @@ public class ProductDAOImpl implements ProductDAO{
     }
 
 
+    @Override
+    public List<Product> findProductByName(String theName){
+        TypedQuery<Product> query = entityManager.createQuery("FROM Product " +
+                                                                 "WHERE name " +
+                                                                 "LIKE CONCAT('%', :theData)"
+                                                                , Product.class);
+
+        query.setParameter("theData", theName);
+
+        return query.getResultList();
+    }
 
 
 //    @Override
