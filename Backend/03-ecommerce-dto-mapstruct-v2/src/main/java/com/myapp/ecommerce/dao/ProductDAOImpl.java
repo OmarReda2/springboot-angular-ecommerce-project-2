@@ -1,6 +1,7 @@
 package com.myapp.ecommerce.dao;
 
 import com.myapp.ecommerce.entity.Product;
+import com.myapp.ecommerce.entity.ProductCategory;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,24 +61,27 @@ public class ProductDAOImpl implements ProductDAO{
     }
 
 
-//    @Override
-//    public Product findProductById(int theId) {
-//        Product theProduct = entityManager.find(Product.class, theId);
-//        return  theProduct;
-//    }
-//
-//    @Override
-//    public void addProduct(Product theProduct) {
-//        entityManager.persist(theProduct);
-//    }
-//
-//    @Override
-//    public void deleteProduct(Product theProduct) {
-//        entityManager.remove(theProduct);
-//    }
-//
-//    @Override
-//    public void updateProduct(Product theProduct) {
-//        entityManager.merge(theProduct);
-//    }
+    public Long countProducts(){
+
+        TypedQuery<Long> query = entityManager.createQuery(
+                "SELECT COUNT(*) " +
+                   "FROM Product", Long.class);
+
+        return query.getSingleResult();
+    }
+
+
+
+    @Override
+    public List<Product> getRangedProductsWithCategoryId(int theId, int size , int start){
+        TypedQuery<Product> query = entityManager.createQuery(
+                "FROM Product WHERE category.id =: theData",
+                Product.class);
+
+        query.setFirstResult(start);
+        query.setMaxResults(size);
+        query.setParameter("theData", theId);
+
+        return query.getResultList();
+    }
 }

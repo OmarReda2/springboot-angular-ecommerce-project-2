@@ -59,10 +59,10 @@ public class CategoryServiceImpl implements CategoryService{
 
 
     @Override
-    public CategoryDTO getCategoryById(int theId) {
+    public CategoryDTO getCategoryWithProductsById(int theId) {
 
         try {
-            ProductCategory category = categoryDAO.getCategoryById(theId);
+            ProductCategory category = categoryDAO.getCategoryWithProductsById(theId);
             return mapper.toCategoryDTO(category);
         }
         catch (RuntimeException exc){

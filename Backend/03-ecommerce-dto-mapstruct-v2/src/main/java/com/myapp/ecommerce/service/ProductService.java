@@ -12,6 +12,10 @@ public interface ProductService {
 
     public List<ProductDTO> findProductByName(String theName);
 
+    public List<ProductDTO> findSelectedProductsForPagination(int theId, int size , int start);
+
+//    List<ProductDTO> findSelectedProductsForPagination();
+
 
 
 

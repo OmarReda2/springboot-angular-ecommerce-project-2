@@ -54,7 +54,7 @@ public class CategoryRestController {
     @GetMapping("/products/search/findByCategoryId")
     public ResponseEntity<Object> getCategoryById(@RequestParam("id") int theId){
 
-        CategoryDTO category = categoryService.getCategoryById(theId);
+        CategoryDTO category = categoryService.getCategoryWithProductsById(theId);
 
         return ResponseHandler.generateResponse(HttpStatus.OK, category, 1);
     }

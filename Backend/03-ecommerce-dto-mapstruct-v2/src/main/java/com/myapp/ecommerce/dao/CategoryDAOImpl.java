@@ -55,13 +55,16 @@ public class CategoryDAOImpl implements CategoryDAO {
     }
 
     @Override
-    public ProductCategory getCategoryById(int theId) {
+    public ProductCategory getCategoryWithProductsById(int theId) {
         TypedQuery<ProductCategory> query = entityManager.createQuery("FROM ProductCategory " +
                                                                          "WHERE id =: theData", ProductCategory.class);
         query.setParameter("theData", theId);
 
         return query.getSingleResult();
     }
+
+
+
 
 
 }

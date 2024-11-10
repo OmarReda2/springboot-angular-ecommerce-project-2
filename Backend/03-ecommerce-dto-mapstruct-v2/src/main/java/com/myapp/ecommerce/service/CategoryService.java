@@ -1,7 +1,6 @@
 package com.myapp.ecommerce.service;
 
 import com.myapp.ecommerce.dto.CategoryDTO;
-import com.myapp.ecommerce.entity.ProductCategory;
 
 import java.util.List;
 
@@ -11,6 +10,8 @@ public interface CategoryService {
 
     List<CategoryDTO> getAllCategoriesWithProducts();
 
-    CategoryDTO getCategoryById(int theId);
+    CategoryDTO getCategoryWithProductsById(int theId);
+
+//    CategoryDTO getCategoryWithProductsRangeById(int theId);
 
 }

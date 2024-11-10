@@ -1,6 +1,7 @@
 package com.myapp.ecommerce.dao;
 
 import com.myapp.ecommerce.entity.Product;
+import com.myapp.ecommerce.entity.ProductCategory;
 
 import java.util.List;
 
@@ -10,12 +11,10 @@ public interface ProductDAO {
     Product findProductById(int theId);
 
     List<Product> findProductByName(String theName);
-//
-//    void addProduct(Product theProduct);
-//
-//    void deleteProduct(Product theProduct);
-//
-//    void updateProduct(Product theProduct);
+
+    Long countProducts();
+
+    List<Product> getRangedProductsWithCategoryId(int theId, int size, int start);
 
 
 }

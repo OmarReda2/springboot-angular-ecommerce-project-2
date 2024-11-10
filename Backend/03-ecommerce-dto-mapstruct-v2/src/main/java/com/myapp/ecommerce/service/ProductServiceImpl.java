@@ -1,5 +1,6 @@
 package com.myapp.ecommerce.service;
 
+import com.myapp.ecommerce.dao.CategoryDAO;
 import com.myapp.ecommerce.dao.ProductDAO;
 import com.myapp.ecommerce.dto.ProductDTO;
 import com.myapp.ecommerce.dto.ProductMapper;
@@ -21,6 +22,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     public ProductServiceImpl(ProductDAO theProductDAO,
+                              CategoryDAO CategoryDAO,
                               ProductMapper theMapper){
         productDAO = theProductDAO;
         mapper = theMapper;
@@ -89,6 +91,28 @@ public class ProductServiceImpl implements ProductService {
             throw new ProductNotFoundException("Products Not Found with the Given Name: " + theName);
         }
     }
+
+
+
+    @Override
+    public List<ProductDTO> findSelectedProductsForPagination(int theId, int size , int start){
+
+        start = (start-1) * size + 1;
+
+        List<Product> selectedProducts = productDAO.getRangedProductsWithCategoryId(theId, size, start);
+
+        return selectedProducts.stream()
+                                .map(p -> mapper.toProductDto(p))
+                                .collect(Collectors.toList());
+    }
+
+//
+//    List<ProductDTO> findSelectedProductsForPagination(int size, int current){
+//        int startCount = current * size;
+//        int endCount = startCount + size;
+//
+//        CategoryDAO
+//    }
 
 
 

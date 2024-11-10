@@ -66,4 +66,40 @@ public class ProductRestController {
         return ResponseHandler.generateNamedResponse(HttpStatus.OK, data, data.size(), "products");
     }
 
+
+
+
+
+    @GetMapping("/products/paginate")
+    public ResponseEntity<Object> getProductsPaginate(
+                                @RequestParam("id") int theId,
+                                @RequestParam("size") int size,
+                                @RequestParam("page") int start){
+
+        List<ProductDTO> data = productService.findSelectedProductsForPagination(theId, size, start);
+
+        return ResponseHandler.generateNamedResponse(HttpStatus.OK, data, data.size(), "products");
+
+
+
+    }
+
+
+
+
+
+
+//
+//    @GetMapping("/products")
+//    public ResponseEntity<Object> getProductsPaginate(@RequestParam("page") int thePage,
+//                                                      @RequestParam("size") int theSize){
+//        return null;
+//    }
+
+
+//    @GetMapping("/test")
+//    public Object test(){
+//
+//    }
+
 }
