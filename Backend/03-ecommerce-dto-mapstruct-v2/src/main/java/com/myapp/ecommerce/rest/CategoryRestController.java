@@ -25,14 +25,19 @@ public class CategoryRestController {
 
 
 
+
     // retrieve only categories
     @GetMapping("/findAllCategory")
     public ResponseEntity<Object> getAllCategories(){
 
         List<CategoryDTO> category = categoryService.getAllCategories();
 
-        return ResponseHandler.generateNamedResponse(HttpStatus.OK, category, category.size(),"categories");
+//        return ResponseHandler.generateNamedResponse(HttpStatus.OK, category, category.size(),"categories");
+        return ResponseHandler.generateNamedResponse(HttpStatus.OK, category, "categories");
+
     }
+
+
 
 
 
@@ -43,8 +48,11 @@ public class CategoryRestController {
 
         List<CategoryDTO> category = categoryService.getAllCategoriesWithProducts();
 
-        return ResponseHandler.generateNamedResponse(HttpStatus.OK, category, category.size(), "categories");
+//        return ResponseHandler.generateNamedResponse(HttpStatus.OK, category, category.size(), "categories");
+        return ResponseHandler.generateNamedResponse(HttpStatus.OK, category, "categories");
     }
+
+
 
 
 
@@ -56,6 +64,8 @@ public class CategoryRestController {
 
         CategoryDTO category = categoryService.getCategoryWithProductsById(theId);
 
-        return ResponseHandler.generateResponse(HttpStatus.OK, category, 1);
+//        return ResponseHandler.generateResponse(HttpStatus.OK, category, 1);
+        return ResponseHandler.generateResponse(HttpStatus.OK, category);
+
     }
 }

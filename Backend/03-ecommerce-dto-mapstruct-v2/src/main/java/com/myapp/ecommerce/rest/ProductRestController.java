@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -33,7 +34,8 @@ public class ProductRestController {
     public ResponseEntity<Object> getAllProducts(){
 
         List<ProductDTO> data = productService.findAllProducts();
-        return ResponseHandler.generateNamedResponse(HttpStatus.OK, data, data.size(), "products");
+//        return ResponseHandler.generateNamedResponse(HttpStatus.OK, data, data.size(), "products");
+        return ResponseHandler.generateNamedResponse(HttpStatus.OK, data, "products");
     }
 
 
@@ -47,7 +49,9 @@ public class ProductRestController {
 
         ProductDTO data = productService.findProductById(theId);
 
-        return ResponseHandler.generateResponse(HttpStatus.OK, data, 1);
+//        return ResponseHandler.generateResponse(HttpStatus.OK, data, 1);
+        return ResponseHandler.generateResponse(HttpStatus.OK, data);
+
     }
 
 
@@ -63,7 +67,9 @@ public class ProductRestController {
 
         List<ProductDTO> data = productService.findProductByName(theName);
 
-        return ResponseHandler.generateNamedResponse(HttpStatus.OK, data, data.size(), "products");
+//        return ResponseHandler.generateNamedResponse(HttpStatus.OK, data, data.size(), "products");
+        return ResponseHandler.generateNamedResponse(HttpStatus.OK, data, "products");
+
     }
 
 
@@ -78,8 +84,13 @@ public class ProductRestController {
 
         List<ProductDTO> data = productService.findSelectedProductsForPagination(theId, size, start);
 
-        return ResponseHandler.generateNamedResponse(HttpStatus.OK, data, data.size(), "products");
+        HashMap<String, Integer> pageInfo = productService.paginationInfo(theId, size, start);
 
+
+
+
+//        return ResponseHandler.generatePageResponse(HttpStatus.OK, data, pageInfo, data.size(), "products");
+        return ResponseHandler.generatePageResponse(HttpStatus.OK, data, pageInfo, "products");
 
 
     }

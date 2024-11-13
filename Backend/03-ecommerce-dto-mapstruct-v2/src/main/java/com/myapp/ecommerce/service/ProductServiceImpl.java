@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -106,14 +106,23 @@ public class ProductServiceImpl implements ProductService {
                                 .collect(Collectors.toList());
     }
 
-//
-//    List<ProductDTO> findSelectedProductsForPagination(int size, int current){
-//        int startCount = current * size;
-//        int endCount = startCount + size;
-//
-//        CategoryDAO
-//    }
 
+
+    @Override
+    public HashMap<String, Integer> paginationInfo(int theId, int theSize, int number){
+
+        int totalElements = Math.toIntExact(productDAO.countProductsForCategory(theId));
+        int totalPages = (int) Math.ceil(totalElements / (double)theSize);
+//        int start = (theStart-1) * size + 1;
+
+        HashMap<String, Integer> map = new HashMap<>();
+        map.put("totalElements", totalElements);
+        map.put("totalPages", totalPages);
+        map.put("size", theSize);
+        map.put("number", number);
+
+        return map;
+    }
 
 
 

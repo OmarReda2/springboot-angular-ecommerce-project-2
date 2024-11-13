@@ -61,12 +61,15 @@ public class ProductDAOImpl implements ProductDAO{
     }
 
 
-    public Long countProducts(){
+    @Override
+    public Long countProductsForCategory(int id){
 
         TypedQuery<Long> query = entityManager.createQuery(
                 "SELECT COUNT(*) " +
-                   "FROM Product", Long.class);
+                   "FROM Product " +
+                   "WHERE category.id =: theData", Long.class);
 
+        query.setParameter("theData", id);
         return query.getSingleResult();
     }
 

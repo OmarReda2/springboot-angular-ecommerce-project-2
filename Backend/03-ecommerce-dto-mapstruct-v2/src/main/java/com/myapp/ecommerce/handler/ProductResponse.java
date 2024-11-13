@@ -11,11 +11,13 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ProductResponse {
 
-    private int status;
+//    private int status;
 
-    private int count;
+//    private int count;
 
     private Object _embedded;
+
+    private Object page;
 //    private Object data;
 
 
